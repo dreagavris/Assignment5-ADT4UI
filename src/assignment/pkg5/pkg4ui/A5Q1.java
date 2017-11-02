@@ -41,38 +41,7 @@ public class A5Q1 {
         numItems++;
     }
 
-    public void add(int pos, int num) {
-        // at the front
-        if (pos == 0) {
-            // create the node
-            IntNode temp = new IntNode(num);
-            // the new node points to the start
-            temp.setNext(head);
-            // reassign the head node
-            head = temp;
-            // adding at the end of the list
-        } else if (pos == numItems) {
-            add(num);
-            // anywhere else . . .
-        } else {
-            // start at the beginning
-            IntNode node = head;
-            // move to the node before the insert
-            for (int i = 0; i < pos - 1; i++) {
-                node = node.getNext();
-            }
-            // @ node just before insert
-            IntNode temp = new IntNode(num);
-            // create the after linik first!
-            temp.setNext(node.getNext());
-            // change node pointer
-            node.setNext(temp);
-        }
-        // increase items in counter
-        numItems++;
 
-
-    }
 
     public int size() {
         return numItems;
