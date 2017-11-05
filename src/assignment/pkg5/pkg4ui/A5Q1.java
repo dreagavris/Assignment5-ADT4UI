@@ -21,6 +21,15 @@ public class A5Q1 {
     public void add(int num) {
         // start at beginning of list
         IntNode node = head;
+        
+        
+
+
+
+
+
+
+
         // see if it is first item
         if (node == null) {
             IntNode temp = new IntNode(num);
@@ -51,10 +60,10 @@ public class A5Q1 {
         return numItems == 0;
     }
 
-    public int get(int position) {
+    public int get(int index) {
         IntNode node = head;
         // move the number of times
-        for (int i = 0; i < position; i++) {
+        for (int i = 0; i < index; i++) {
             node = node.getNext();
         }
         return node.getNum();
@@ -62,14 +71,41 @@ public class A5Q1 {
 
     
     public void remove(int num) {
+        
         IntNode node = head;
-        // find the node where that is storing the desired number
-        while(num!=head.getNum()){
-            // increase the comparison position
-            node= node.getNext();
+        
+        
+        // if the number that is to be removed is at the start of the list
+        if(node.getNum()==num){
+            // move head up one (moving the list to remove the first node)
+            head = head.getNext();
+            
+            
         }
+        // create a node to keep track of nods behind the comparison node
+            IntNode beforeNode = head.getNext();
+        
+        // while the current node being looked at tdoesnt contain the number that is to be removed
+        while(node.getNum()!=num){
+            
+            // move to the next node
+            node= node.getNext();
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // decrease the number of items in the list by 1
+        numItems--;
         // connect the node before the one wanting to be taken away to the node to the roght of the one being removed
-        IntNode newNode = node-1;
+        
         // remove the node which contains the number they want to remove
         
         
@@ -111,8 +147,9 @@ public class A5Q1 {
         A5Q1 list = new A5Q1();
         list.add(2);
         list.add(-5);
-        list.add( 13);
-        list.remove(1);
+        list.add( 12);
+        list.add(1);
+        list.remove(2);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
