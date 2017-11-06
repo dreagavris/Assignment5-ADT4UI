@@ -21,22 +21,32 @@ public class A5Q1 {
     public void add(int num) {
         // start at beginning of list
         IntNode node = head;
-
-        // see if it is first item
-        if (node == null) {
-            IntNode temp = new IntNode(num);
-            head = temp;
-        } else {
-            // travel to the end 
-            while (node.getNext() != null) {
-                // travel to the next node
-                node = node.getNext();
+        // if the list is empty
+        if(numItems==0){
+            // add a node into the list containing the desired number
+            IntNode addNode = new IntNode(num);
+            // make the new node point to the start
+            addNode.setNext(head);
+            // reassign the head to the begining
+            head = addNode;
+        }
+        // is the list only has one item in it
+        else if(numItems==1){
+            // if the number inputted is smaller than the number in the list
+            if(node.getNum()>num){
+                // place the number before the one in the list
+                IntNode temp = new IntNode(num);
+                temp.setNext(node);
+                // reassigning head to the begining
+                head = temp;
             }
-            // node is the last node in the list
-            // create the new node
-            IntNode temp = new IntNode(num);
-            // insert it into the list
-            node.setNext(temp);
+            
+            
+            
+            
+            
+            
+            
         }
         // increase the size counter 
         numItems++;
@@ -64,6 +74,8 @@ public class A5Q1 {
      * @param num the number entered by the user to be removed from the list
      */
     public void remove(int num) {
+        // only run this method when the list is not empty
+        if(numItems!=0){
         // create a node at the begining of the list
         IntNode node = head;
         // create a node to keep track of nods behind the comparison node
@@ -118,7 +130,7 @@ public class A5Q1 {
             }
             // decrease the number of items in the list by 1
             numItems--;
-        }
+        }}
     }
 
     /**
@@ -129,10 +141,10 @@ public class A5Q1 {
         A5Q1 list = new A5Q1();
         list.add(2);
         list.add(-5);
-        list.add(12);
-        list.add(11);
-        list.add(1);
-        list.remove(12);
+        
+        list.remove(222);
+        
+        
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
