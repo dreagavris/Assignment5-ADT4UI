@@ -21,6 +21,9 @@ public class A5Q1 {
     public void add(int num) {
         // start at beginning of list
         IntNode node = head;
+        // create a node to keep track of the node behind the primary node
+        IntNode before =head;
+        boolean endSearch =false;
         // if the list is empty
         if(numItems==0){
             // add a node into the list containing the desired number
@@ -30,7 +33,7 @@ public class A5Q1 {
             // reassign the head to the begining
             head = addNode;
         }
-        // is the list only has one item in it
+        // if the list only has one item in it
         else if(numItems==1){
             // if the number inputted is smaller than the number in the list
             if(node.getNum()>num){
@@ -39,6 +42,37 @@ public class A5Q1 {
                 temp.setNext(node);
                 // reassigning head to the begining
                 head = temp;
+                
+            }// the number inputted is larger or equal than the number in the list
+            else{
+                // create a node to add the number
+                IntNode temp = new IntNode(num);
+                node.setNext(temp);
+                // reassign head
+                head = node;
+            }
+        }
+            // there is more than one item in the list
+            else{
+                // move the primary comparison node over one
+                node = node.getNext();
+                for (int i = 0; i < numItems; i++) {
+                    if(node.getNum()<num){
+                        // move on to the next node in the list
+                        node = node.getNext();
+                        // move the before node to the next node
+                        before = before.getNext();
+                    }// the number in the node is smaller or equal to the number to be entered
+                    else{
+                        // create a new node to insert the number to be added
+                        IntNode temp = new IntNode(num);
+                        // link the new node created to the primary comparison node
+                        temp.setNext(node);
+                        // link the before node to the new temporary node
+                        before.setNext(temp);
+                        endSearch=true;
+                    }
+                }
             }
             
             
@@ -46,8 +80,8 @@ public class A5Q1 {
             
             
             
-            
-        }
+       
+       
         // increase the size counter 
         numItems++;
     }
@@ -139,10 +173,13 @@ public class A5Q1 {
     public static void main(String[] args) {
         // TESTING
         A5Q1 list = new A5Q1();
-        list.add(2);
-        list.add(-5);
+       list.add(12);
+       list.add(210);
         
-        list.remove(222);
+        
+        list.add(1);
+       
+        list.remove(0);
         
         
         for (int i = 0; i < list.size(); i++) {
