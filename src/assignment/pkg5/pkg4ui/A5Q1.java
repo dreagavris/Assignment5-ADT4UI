@@ -21,14 +21,6 @@ public class A5Q1 {
     public void add(int num) {
         // start at beginning of list
         IntNode node = head;
-        
-        
-
-
-
-
-
-
 
         // see if it is first item
         if (node == null) {
@@ -50,8 +42,6 @@ public class A5Q1 {
         numItems++;
     }
 
-
-
     public int size() {
         return numItems;
     }
@@ -69,87 +59,80 @@ public class A5Q1 {
         return node.getNum();
     }
 
-    
+    /**
+     *
+     * @param num the number entered by the user to be removed from the list
+     */
     public void remove(int num) {
-        
+        // create a node at the begining of the list
         IntNode node = head;
-        
-        
-        // if the number that is to be removed is at the start of the list
-        if(node.getNum()==num){
-            // move head up one (moving the list to remove the first node)
-            head = head.getNext();
-            
-            
-        }
         // create a node to keep track of nods behind the comparison node
-            IntNode beforeNode = head.getNext();
-        
-        // while the current node being looked at tdoesnt contain the number that is to be removed
-        while(node.getNum()!=num){
-            
-            // move to the next node
-            node= node.getNext();
-            
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // decrease the number of items in the list by 1
-        numItems--;
-        // connect the node before the one wanting to be taken away to the node to the roght of the one being removed
-        
-        // remove the node which contains the number they want to remove
-        
-        
-        
-        
-//        // if removing from the start
-//        if (pos == 0) {
-//            head = head.getNext();
-//        } else if (pos == numItems - 1) {
-//            // removing from end
-//            IntNode node = head;
-//            // moving to the second last item
-//            for (int i = 0; i < numItems - 1; i++) {
-//                node = node.getNext();
-//            }
-//            // sever the link
-//            node.setNext(null);
-//        } else {
-//            IntNode node = head;
-//            // move to the spot just before
-//            for (int i = 0; i < pos - 1; i++) {
-//                node = node.getNext();
-//            }
-//            // the node to remove
-//            IntNode toRemove = node.getNext();
-//            // its next node
-//            IntNode next = toRemove.getNext();
-//            // set all the llinks
-//            node.setNext(next);
-//            toRemove.setNext(null);
-//        }
-//        numItems--;
-//    }
+        IntNode before = head;
+        // create a node to search the list and see if the value exists
+        IntNode seek = head;
+        // set the boolean which allows the node to initially move in front of the previous node to be false
+        boolean setNodeInFront = false;
+        // set the boolean which allows the program to determine if the desired number is in the list to be false
+        boolean inList = false;
+        // go through the entire list to determine if the number that is to be removed is in the list
+        for (int i = 0; i < numItems; i++) {
+            // if the value is within the array
+            if (seek.getNum() == num) {
+                // set the boolean that the desired number exists to be true
+                inList = true;
             }
+            // move to the next node to search for the value to be removed
+            seek = seek.getNext();
+        }
+        // only run the rest of the method if the number to be removed is within the list
+        if (inList) {
+            // if the number that is to be removed is at the start of the list
+            if (node.getNum() == num) {
+                // move head up one (moving the list to remove the first node)
+                head = head.getNext();
+                node.setNext(null);
+            } else if (!setNodeInFront) {
+                // move the primary comparison node to the next node
+                node = node.getNext();
+
+                // set the boolean to be true so the node before the comparison node can be kept tracl of
+                setNodeInFront = true;
+            }
+            // while the value stored in the node is not equal to the value that is to be removed
+            while (node.getNum() != num) {
+                // move to the next node
+                node = node.getNext();
+                // move the previous node to the next node
+                before = before.getNext();
+            }
+            // if the node to be removed is at the end
+            if (node.getNext() == null) {
+                // sever the link with the last node
+                node.setNext(null);
+            } // if the node to be removed is in the middle of the list
+            else {
+                // set the previous node to be linked to the one after the one being removed
+                before.setNext(node.getNext());
+                // sever the link between the node being removed and the one after
+                node.setNext(null);
+            }
+            // decrease the number of items in the list by 1
+            numItems--;
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TESTING
         A5Q1 list = new A5Q1();
         list.add(2);
         list.add(-5);
-        list.add( 12);
+        list.add(12);
+        list.add(11);
         list.add(1);
-        list.remove(2);
+        list.remove(12);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
