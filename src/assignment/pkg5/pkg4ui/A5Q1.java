@@ -66,12 +66,12 @@ public class A5Q1 {
             } else {
 
                 node = node.getNext();
-                System.out.println("shi");
+                System.out.println("");
                 // move the primary comparison node over one
                 while (!endSearch) {
-                    System.out.println("hi");
+                    System.out.println("");
                     counter++;
-                    System.out.println("em");
+                    System.out.println("");
                     if (node.getNum() >= num) {
 // create a new node to insert the number to be added
                         IntNode temp = new IntNode(num);
@@ -191,10 +191,9 @@ public class A5Q1 {
         // TESTING
         A5Q1 list = new A5Q1();
         list.add(1);
-        list.add(4);
-        list.add(9);
-            
+        list.add(-8);   
         list.add(0);
+        list.remove(90);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
