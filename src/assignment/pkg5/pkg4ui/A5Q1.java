@@ -19,13 +19,14 @@ public class A5Q1 {
     }
 
     public void add(int num) {
-        // start at beginning of list
+        // create a node at the beginning of list (will be primary comparison node)
         IntNode node = head;
         // create a node to keep track of the node behind the primary node
         IntNode before = head;
+        // create a boolean to ensure that the method will stop searching for the suitibale posiotn of the inputted number until said position is found
         boolean endSearch = false;
-        int counter = 1;
-
+        // create a counter that helps keep track where the nodes are in the list
+        int counter = 0;
         // if the list is empty
         if (numItems == 0) {
             // add a node into the list containing the desired number
@@ -34,68 +35,70 @@ public class A5Q1 {
             addNode.setNext(head);
             // reassign the head to the begining
             head = addNode;
-            System.out.println("ssssssss");
         } // if the list only has one item in it
         else if (numItems == 1) {
             // if the number inputted is smaller than the number in the list
             if (node.getNum() > num) {
                 // place the number before the one in the list
                 IntNode temp = new IntNode(num);
+                // set the node equalt to the second node in the list
                 temp.setNext(node);
                 // reassigning head to the begining
                 head = temp;
-                System.out.println("asssa");
 
             }// the number inputted is larger or equal than the number in the list
             else {
-                System.out.println("aa");
                 // create a node to add the number
                 IntNode temp = new IntNode(num);
+                // set the first item in the list linked to the new node being added
                 node.setNext(temp);
                 // reassign head
                 head = node;
             }
         } // there is more than one item in the list
-        else {
-            System.out.println("fuc");
-
-            if (head.getNum() >= num) {
+        else if (numItems > 1) {
+            //see if the first item in the list is larger or equal to the number entered
+            if (node.getNum() >= num) {
+                // create a node to insert the number into the list
                 IntNode temp = new IntNode(num);
+                // link the node to the beginning of the list
                 temp.setNext(head);
+                // reassigning head to the begining
                 head = temp;
-            } else {
-
+            }// the first item in the list is less than the number entered
+            else if (node.getNum() < num) {
+                // move to the next item in the list
                 node = node.getNext();
-                System.out.println("");
-                // move the primary comparison node over one
+                // search while the best possible position to place the inputted number has not been found
                 while (!endSearch) {
-                    System.out.println("");
+                    // increase the counter variable by one to indicate what node is being observed
                     counter++;
-                    System.out.println("");
-                    if (node.getNum() >= num) {
-// create a new node to insert the number to be added
+                    // if the nodes have reached the end of the list
+                    if (counter == numItems) {
+                        // create a node to store the inputted number
                         IntNode temp = new IntNode(num);
-                        // link the new node created to the primary comparison node
-                        temp.setNext(node);
-                        // link the before node to the new temporary node
+                        // link the last item in the list to the inputted number
                         before.setNext(temp);
+                        // stop searching for the positon to place the node
                         endSearch = true;
-                        
-                    } // the number in the node is smaller or equal to the number to be entered
-                    else if (node.getNum() < num) {
-                        // move on to the next node in the list
-                        node = node.getNext();
-                        System.out.println("hee");
-                        // move the before node to the next node
-                        before = before.getNext();
-                    } else if (counter == numItems) {
+                    } // the end of the list has not been reached and if the number in the list is larger or equal to the inputted number
+                    else if (node.getNum() >= num) {
+                        // create a node to hold the desired value
                         IntNode temp = new IntNode(num);
-                        node.setNext(temp);
+                        // link the newly created node to the node after it in the list
+                        temp.setNext(node);
+                        // set the node before the intitiale comparison node (IntNode node) to be linked to the node containing the desired number
+                        before.setNext(temp);
+                        // prevent the method from continuing to seek where to place the number in the list
                         endSearch = true;
-
+                    }// the number is not smaller or equal to the comparison node
+                    else {
+                        // move the primary comarison node over
+                        node = node.getNext();
+                        // move the node behind the primary comparison node over
+                        before = before.getNext();
                     }
                 }
-
             }
         }
         // increase the size counter
@@ -190,10 +193,14 @@ public class A5Q1 {
     public static void main(String[] args) {
         // TESTING
         A5Q1 list = new A5Q1();
-        list.add(1);
-        list.add(-8);   
-        list.add(0);
-        list.remove(90);
+        list.add(-1);
+
+        list.add(-11);
+        list.add(3);
+        list.add(-3);
+        list.add(222);
+        list.remove(222);
+        System.out.println("size " + list.size());;
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
