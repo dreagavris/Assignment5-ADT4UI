@@ -12,7 +12,6 @@ package assignment.pkg5.pkg4ui;
 public class List {
 
     private int[] array;
-
     private int numItems;
 
     public List() {
@@ -23,13 +22,14 @@ public class List {
 
     public void add(int index, int num) {
         // if there is enough room in the array to store the desired number
-        if(array.length>numItems){
+        if (array.length > numItems) {
             // insert the number at the desired positon
             array[index] = num;
+
         }// if there is not enough space
-        else{
+        else {
             // make another array for space
-            int[] temp = new int[array.length*2];
+            int[] temp = new int[array.length * 2];
             // copy values from original array into new array
             for (int i = 0; i < array.length; i++) {
                 temp[i] = array[i];
@@ -38,9 +38,10 @@ public class List {
             array = temp;
             // add the item in at the desired position
             array[index] = num;
-            // increase the number of items
-            numItems++;
-        }
+
+
+        } // increase the number of items
+        numItems++;
     }
 
     public int size() {
@@ -52,21 +53,17 @@ public class List {
     }
 
     public int get(int index) {
-        int valueAtIndex = 0;
-        // move the number of times
-        for (int i = 0; i < index; i++) {
-            valueAtIndex = array[i];
-        }
-        return valueAtIndex;
+
+        return array[index];
     }
 
     public void remove(int index) {
         // if removing from the start
-        if(index == 0){
-            
+        if (index == 0) {
+
             for (int i = 1; i < array.length; i++) {
                 // move all the values back one spot
-                array[i-1] = array[i];
+                array[i - 1] = array[i];
             }
         }
         numItems--;
@@ -77,10 +74,10 @@ public class List {
      */
     public static void main(String[] args) {
         List list = new List();
-        list.add(9, 1);
+        list.add(1, 1);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
+        System.out.println(list.isEmpty());
     }
-
 }
