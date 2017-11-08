@@ -8,12 +8,12 @@ package assignment.pkg5.pkg4ui;
  *
  * @author manok5757
  */
-public class A5Q1 {
+public class OrderedList {
 
     private IntNode head;
     private int numItems;
 
-    public A5Q1() {
+    public OrderedList() {
         head = null;
         numItems = 0;
     }
@@ -192,14 +192,15 @@ public class A5Q1 {
      */
     public static void main(String[] args) {
         // TESTING
-        A5Q1 list = new A5Q1();
+        OrderedList list = new OrderedList();
         list.add(-1);
 
         list.add(-11);
         list.add(3);
         list.add(-3);
         list.add(222);
-        list.remove(222);
+        list.add(22222);
+        list.remove(22322);
         System.out.println("size " + list.size());;
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
