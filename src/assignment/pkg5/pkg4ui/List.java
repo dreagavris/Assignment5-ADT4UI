@@ -40,8 +40,10 @@ public class List {
             array[index] = num;
 
 
+
         } // increase the number of items
         numItems++;
+        System.out.println(numItems);
     }
 
     public int size() {
