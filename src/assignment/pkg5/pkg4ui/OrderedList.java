@@ -9,7 +9,7 @@ package assignment.pkg5.pkg4ui;
  * @author manok5757
  */
 public class OrderedList {
-
+    
     private IntNode head;
     private int numItems;
 

@@ -155,8 +155,16 @@ public class List {
     }
 
     public int get(int index) {
-        // return the value at the inputted index
-        return array[index];
+        // if the index entered contains a value entered
+        if(numItems>index){
+          // return the value at the inputted index
+        return array[index];  
+        }// the user asked for a the value sotred at a postion that doesnt exist
+        else{
+            // reyturn a value that does not make sense as they have asked for the value of a position that does not exist
+           return -999999999; 
+        }
+        
     }
 
     public void remove(int index) {
@@ -191,15 +199,12 @@ public class List {
 
             }// removing from end of list
             else if (index + 1 == numItems) {
-                // remove the value by setting it to 0
-                array[index] = 0;
+                
                 // decrease the number of items in the list
                 numItems--;
             }
         } // there is one item in the list to remove
         else if (numItems == 1) {
-            // set the value of the posiotn within the array to be 0
-            array[0] = 0;
             // decrease the number of items in the list
             numItems--;
         }// the list is empty
@@ -214,6 +219,7 @@ public class List {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TESTING
         List list = new List();
 //        list.add(0, 1);
 //        list.add(1, 33);
@@ -252,10 +258,11 @@ public class List {
             System.out.println(list.get(i));
         }
         System.out.println("");
-        list.remove(0);
+        list.remove(2);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
         System.out.println("Size " + list.size());
+        System.out.println(list.get(0));
     }
 }
