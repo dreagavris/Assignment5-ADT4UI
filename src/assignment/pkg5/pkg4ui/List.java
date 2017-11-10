@@ -156,15 +156,15 @@ public class List {
 
     public int get(int index) {
         // if the index entered contains a value entered
-        if(numItems>index){
-          // return the value at the inputted index
-        return array[index];  
+        if (numItems > index) {
+            // return the value at the inputted index
+            return array[index];
         }// the user asked for a the value sotred at a postion that doesnt exist
-        else{
+        else {
             // reyturn a value that does not make sense as they have asked for the value of a position that does not exist
-           return -999999999; 
+            return -999999999;
         }
-        
+
     }
 
     public void remove(int index) {
@@ -199,7 +199,7 @@ public class List {
 
             }// removing from end of list
             else if (index + 1 == numItems) {
-                
+
                 // decrease the number of items in the list
                 numItems--;
             }

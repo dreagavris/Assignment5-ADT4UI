@@ -9,12 +9,17 @@ package assignment.pkg5.pkg4ui;
  * @author manok5757
  */
 public class OrderedList {
-    
+
+    // create an instance variable that allos the first node to be always kept travk of
+
     private IntNode head;
+    // create an instance variable to keep track of the number of items in the list
     private int numItems;
 
     public OrderedList() {
+        // initialize the head node to be nowwhere now
         head = null;
+        // intiailaze the list by setting the number of items to be 0
         numItems = 0;
     }
 
@@ -106,19 +111,24 @@ public class OrderedList {
     }
 
     public int size() {
+        // return the number of items in the list
         return numItems;
     }
 
     public boolean isEmpty() {
+        // retuern true if the number of items in the list is 0
         return numItems == 0;
     }
 
     public int get(int index) {
+        // set the node to be at the beginnig
         IntNode node = head;
-        // move the number of times
+        // move a number of times equal the the index entered
         for (int i = 0; i < index; i++) {
+            // move the node over
             node = node.getNext();
         }
+        // return the value of the node at the desired position
         return node.getNum();
     }
 
