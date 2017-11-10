@@ -257,6 +257,5 @@ public class List {
             System.out.println(list.get(i));
         }
         System.out.println("Size " + list.size());
-
     }
 }
