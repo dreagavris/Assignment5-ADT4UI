@@ -1,148 +1,118 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package assignment.pkg5.pkg4ui;
 
-/**
- *
- * @author Kiran
- */
 public class List {
 
-    private int[] array;
+    private String[] stack;
     private int numItems;
 
     public List() {
+        stack = new String[10];
         numItems = 0;
-        array = new int[10];
     }
 
-    public void add(int index, int num) {
-        int[] shuffleDown = new int[numItems];
-        boolean enoughSpace = true;
-        if (numItems == array.length) {
-            enoughSpace = false;
-        }
-        boolean addLast = false;
-        if (index >= numItems) {
-            addLast = true;
-        }
-        boolean addMiddle = false;
-        if (numItems > 0 && numItems - index > 0) {
-            addMiddle = true;
-        }
-        if (enoughSpace) {
-            if (numItems == 0) {
-                array[0] = num;
-                numItems++;
-            } else if (addLast) {
-                array[numItems] = num;
-                numItems++;
-
-            } else if (addMiddle) {
-                int[] partShuffle = new int[numItems - index];
-                int keepTrackInFirstArray = index;
-                for (int i = 0; i < partShuffle.length; i++) {
-                    partShuffle[i] = array[keepTrackInFirstArray];
-                    keepTrackInFirstArray++;
-                }
-                keepTrackInFirstArray = index;
-                for (int i = 0; i < partShuffle.length; i++) {
-                    array[keepTrackInFirstArray + 1] = partShuffle[i];
-                    keepTrackInFirstArray++;
-                }
-                array[index] = num;
-                numItems++;
-            }
-        } else if (addLast) {
-            int[] temp = new int[array.length * 2];
-            for (int i = 0; i < array.length; i++) {
-                temp[i] = array[i];
-            }
-            array = temp;
-            array[numItems] = num;
+    public void push(String item) {
+        // if there is room in the stack
+        if (numItems < stack.length) {
+            // put the item on the stack
+            stack[numItems] = item;
             numItems++;
-        } else if (addMiddle) {
-            int[] partShuffle = new int[numItems - index];
-            int[] temp = new int[array.length * 2];
-            System.arraycopy(array, 0, temp, 0, array.length);
-            array = temp;
-            int keepTrackInFirstArray = index;
-            for (int i = 0; i < partShuffle.length; i++) {
-                partShuffle[i] = array[keepTrackInFirstArray];
-                keepTrackInFirstArray++;
+        }else{
+            // make more room
+            String[] temp = new String[stack.length*2];
+            // copy items over
+            for(int i = 0; i < stack.length; i++){
+                temp[i] = stack[i];
             }
-            keepTrackInFirstArray = index;
-            for (int i = 0; i < partShuffle.length; i++) {
-                array[keepTrackInFirstArray + 1] = partShuffle[i];
-                keepTrackInFirstArray++;
-            }
-
-            array[index] = num;
+            // stack becomes new array
+            stack = temp;
+            // add item
+            stack[numItems] = item;
             numItems++;
         }
     }
-
-    public int size() {
+    
+    public String pop(){
+        // get the top item on the stack
+        String item = stack[numItems - 1];
+        // one less item
+        numItems--;
+        // give back item
+        return item;
+        
+    }
+    
+    public int size(){
         return numItems;
     }
-
-    public boolean isEmpty() {
+    
+    public String peek(){
+        return stack[numItems - 1];
+    }
+    
+    public boolean isEmpty(){
         return numItems == 0;
     }
 
-    public int get(int index) {
-        if (numItems > index) {
-            return array[index];
-        } else {
-            return -999999;
-        }
-
-    }
-
-    public void remove(int index) {
-        int[] partShuffle = new int[numItems - (index - 1)];
-        if (numItems > 1) {
-            if (numItems > 0 && numItems - index > 0) {
-                int copy = index + 1;
-                for (int i = 0; i < partShuffle.length; i++) {
-                    partShuffle[i] = array[copy];
-                    copy++;
-                }
-                copy = index + 1;
-                for (int i = 0; i < partShuffle.length; i++) {
-                    array[copy - 1] = partShuffle[i];
-                    copy++;
-                }
-                numItems--;
-            } else if (index + 1 == numItems) {
-                numItems--;
-            }
-        } else if (numItems == 1) {
-            numItems--;
-        } else if (numItems == 0) {
-            System.out.println("There is nothing to remove!");
-        }
-
-    }
-
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        // TESTING
-        List list = new List();
-        list.add(0, 1);
-        list.add(2, 3);
-        list.add(1, 33);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+        // the stack works because done in class and was working therefore only test the inLang
+        // make sure the inLang works
+        String test = "as$sa";
+        boolean result = inLang(test);
+        System.out.println(result);
+    }
+
+    public static boolean inLang(String word) {
+        // make sure the word contains the $ sign
+        if (!word.contains("$")) {
+            // if not return false
+            System.out.println("The word doesn't have $ sign.");
+            return false;
         }
-        System.out.println("");
-        list.remove(2);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+        
+        // create two stacks
+        List stack1 = new List();
+        List stack2 = new List();
+        
+        // split the word from the point that it sees the sign $
+        String[] parts = word.split("\\$");
+        
+        
+        String part1 = parts[0];
+        String part2 = parts[1];
+        
+        // make part1 be taken apart from the beginning letter
+        for (int i = 0; i < part1.length(); i++){
+            stack1.push(String.valueOf(part1.charAt(i)));
         }
-        System.out.println("Size " + list.size());
-        System.out.println(list.get(0));
+        
+        // make part2 be looked from the end to compare part1 and part2
+        for (int i = part2.length() - 1; i >= 0; i--) {
+            stack2.push(String.valueOf(part2.charAt(i)));
+        }
+        
+        // make sure the size of part1 and part2 are the same otherwise they're not palindrome
+        if (stack1.size() != stack2.size()) {
+            System.out.println(word + " is not in the correct language");
+            return false;
+        }
+        
+        // make sure to check each letter until stack is empty
+        while (!stack1.isEmpty()) {
+
+            String popFromStack1 = stack1.pop();
+            String popFromStack2 = stack2.pop();
+           
+            // if they are not the same letters than it is not palindrome
+            if (!popFromStack1.equals(popFromStack2)) {
+                System.out.println(word + " not in correct the language");
+                return false;
+            }
+        }
+        // otherwise it is palindrome and the code is in language
+        System.out.println(word + "not in the correct the language");
+        return true;
     }
 }
